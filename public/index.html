@@ -12,51 +12,90 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   </head>
   <body ng-controller="TodoListController as todoList">
+    <div ng-show="page1 === true">
     <div class="container">
       <div class="row DragArea">
         <div class="col-md-12"><p class="title">Drag & Drop</p></div>
         <div class="col-md-12"><p class="title2"> your files to Assets, or</p></div>
 
           <div class="col-md-6 col-md-offset-3">
-            <!-- <form ng-submit="upload()"> -->
             <div class="link-skin fileUpload">
               <span class="title3">click here to browse</span>
-              <input id="inputFileToLoad" type="file" class="upload" onchange="encodeImageFileAsURL();">
+              <input id="inputFileToLoad" type="file" class="upload" onchange="encodeImageFileAsURL()" ng-click="cheagePage1to2()">
             </div>
-          <!-- </form> -->
           </div>
 
       </div>
     </div>
-
+</div>
+  <!-- <button type="button" ng-click="get()">Get api show console</button> -->
+<div ng-show="page2">
     <div class="container">
       <div class="row">
-        <div class="col-md-12"><div id="imgTest"></div></div>
+        <div class="col-md-12"><div id="imgTest" class="map-pic"></div></div>
       </div>
     </div>
     </div>
+</div>
+
+
+
 
 <script>
     function encodeImageFileAsURL() {
-      console.log('success')
-var filesSelected = document.getElementById("inputFileToLoad").files;
-if (filesSelected.length > 0) {
-var fileToLoad = filesSelected[0];
-
-var fileReader = new FileReader();
-
-    fileReader.onload = function(fileLoadedEvent) {
-      var srcData = fileLoadedEvent.target.result; // <--- data: base64
-      var newImage = document.createElement('img');
-      newImage.src = srcData;
-      document.getElementById("imgTest").innerHTML = newImage.outerHTML;
-      alert("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
-      // console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
-    }
- fileReader.readAsDataURL(fileToLoad);
-  }
+      var filesSelected = document.getElementById("inputFileToLoad").files;
+          if (filesSelected.length > 0) {
+             var fileToLoad = filesSelected[0];
+             var fileReader = new FileReader();
+             fileReader.onload = function(fileLoadedEvent) {
+             var srcData = fileLoadedEvent.target.result; // <--- data: base64
+             var newImage = document.createElement('img');
+             newImage.src = srcData;
+             post_img(newImage.src)
+             alert(srcData)
+             document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+            //  alert("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+            // console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+           }
+         fileReader.readAsDataURL(fileToLoad);
+      }
  }
-</script>
 
+ function post_img (imgbase64) {
+  //  var img = {
+  //    data: imgbase64
+  //  }
+  //  $.ajax({
+  //    method: "POST",
+  //    url: "https://testresapi.firebaseio.com/data_img.json",
+  //    data: JSON.stringify(img.data),
+  //    success: function (res) {
+  //      console.log(res)
+  //    }
+  //  })
+
+   var state1 = {
+     page1: true
+   }
+   $.ajax({
+     method: "POST",
+     url: "/status",
+     data: state1,
+     success: function (res) {
+       console.log(res)
+     }
+   })
+ }
+
+ // function get () {
+ //   $.ajax({
+ //     method: "GET",
+ //     url: "https://testresapi.firebaseio.com/data_img.json",
+ //     success: function (res) {
+ //       console.log(res)
+ //     }
+ //   })
+ // }
+</script>
   </body>
 </html>

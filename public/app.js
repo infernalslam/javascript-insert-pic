@@ -18,4 +18,14 @@ angular.module('todoApp', [])
     //     $scope.file_Detail = files[0]
     //   })
     // })
+    $scope.page1 = true
+    $scope.cheagePage1to2 = function () {
+      $scope.page1 = false
+      $scope.page2 = true
+    }
+    $scope.get = function () {
+      $http.get('https://testresapi.firebaseio.com/data_img.json').then(function (req, res) {
+        console.log(res)
+      })
+    }
   })

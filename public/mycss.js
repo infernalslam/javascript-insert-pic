@@ -67,5 +67,9 @@ export default StyleSheet.create({
         "cursor": "pointer",
         "opacity": 0,
         "filter": "alpha(opacity=0)"
+    },
+    "map-pic": {
+        "width": "100%",
+        "height": "100%"
     }
 });
