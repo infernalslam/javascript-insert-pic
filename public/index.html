@@ -1,0 +1,62 @@
+<!doctype html>
+<html ng-app="todoApp">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="mycss.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  </head>
+  <body ng-controller="TodoListController as todoList">
+    <div class="container">
+      <div class="row DragArea">
+        <div class="col-md-12"><p class="title">Drag & Drop</p></div>
+        <div class="col-md-12"><p class="title2"> your files to Assets, or</p></div>
+
+          <div class="col-md-6 col-md-offset-3">
+            <!-- <form ng-submit="upload()"> -->
+            <div class="link-skin fileUpload">
+              <span class="title3">click here to browse</span>
+              <input id="inputFileToLoad" type="file" class="upload" onchange="encodeImageFileAsURL();">
+            </div>
+          <!-- </form> -->
+          </div>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12"><div id="imgTest"></div></div>
+      </div>
+    </div>
+    </div>
+
+<script>
+    function encodeImageFileAsURL() {
+      console.log('success')
+var filesSelected = document.getElementById("inputFileToLoad").files;
+if (filesSelected.length > 0) {
+var fileToLoad = filesSelected[0];
+
+var fileReader = new FileReader();
+
+    fileReader.onload = function(fileLoadedEvent) {
+      var srcData = fileLoadedEvent.target.result; // <--- data: base64
+      var newImage = document.createElement('img');
+      newImage.src = srcData;
+      document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+      alert("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+      // console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+    }
+ fileReader.readAsDataURL(fileToLoad);
+  }
+ }
+</script>
+
+  </body>
+</html>
