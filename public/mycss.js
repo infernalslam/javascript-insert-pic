@@ -71,5 +71,18 @@ export default StyleSheet.create({
     "map-pic": {
         "width": "100%",
         "height": "100%"
+    },
+    "imgTest": {
+        "textAlign": "center"
+    },
+    "imgTest img": {
+        "maxWidth": "100%"
+    },
+    "// circlecircle-ripple": {
+        "backgroundColor": "#35ffc3",
+        "width": 1,
+        "height": 1,
+        "borderRadius": "50%",
+        "animation": "ripple 0.7s linear infinite"
     }
 });

@@ -27,13 +27,35 @@
 
       </div>
     </div>
+
+    <!--testfunction-->
+    <canvas id="canvas" onmousemove="mouseMove(event)" width="550" height="400"></canvas>
+    <style type="text/css">
+    canvas {
+      border:#666 1px solid;
+    }
+    </style>
+
 </div>
   <!-- <button type="button" ng-click="get()">Get api show console</button> -->
 <div ng-show="page2">
     <div class="container">
       <div class="row">
-        <div class="col-md-12"><div id="imgTest" class="map-pic"></div></div>
+        <div class="col-md-12">
+          <div id="imgTest"></div>
+
+        </div>
       </div>
+      <!-- <div class="row">
+        <div class="col-md-12">
+          <canvas style="
+          background-color: #35ffc3;
+          width: 1em;
+          height: 1em;
+          border-radius: 50%;
+          animation: ripple 0.7s linear infinite;"></canvas>
+      </div>
+      </div> -->
     </div>
     </div>
 </div>
@@ -42,6 +64,19 @@
 
 
 <script>
+var canvas = document.getElementById('canvas')
+var ctx = canvas.getContext('2d')
+function mouseMove (e) {
+ var x = e.clientX;
+ var y = e.clientY;
+ console.log(x,y)
+ ctx.beginPath();
+ ctx.fillStyle = "red"
+ ctx.arc(x,y,50 ,0, Math.PI * 2, false)
+ ctx.fill();
+}
+
+
     function encodeImageFileAsURL() {
       var filesSelected = document.getElementById("inputFileToLoad").files;
           if (filesSelected.length > 0) {
